@@ -76,11 +76,11 @@ str_store::intern(std::string_view view)
     tail += len;
     auto new_entry = std::string_view(prev_tail, tail);
     views.insert(new_entry);
-    auto result = str(new_entry);
+    auto res = str(new_entry);
+    assert(tail < string_buffer.end());
     assert(*tail == 0);
     tail++;
-    assert(tail <= string_buffer.end());
-    return result;
+    return res;
 }
 
 str
