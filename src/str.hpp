@@ -13,6 +13,7 @@ public:
     bool operator!=(const str& other) const;
     bool content_eq(const str& other) const;
     bool content_ne(const str& other) const;
+    size_t hash() const;
 
 private:
     std::string_view view;
@@ -38,5 +39,15 @@ private:
     std::vector<char>::iterator tail;
     std::unordered_set<std::string_view> views;
 };
+
+namespace std {
+template<> struct hash<str>
+{
+    std::size_t operator()(str const& s) const noexcept
+    {
+        return s.hash();
+    }
+};
+}
 
 #endif

@@ -47,6 +47,11 @@ str::content_ne(const str& other) const
     return view != other.view;
 }
 
+std::size_t
+str::hash() const {
+    return std::hash<uintptr_t>{}(uintptr_t(view.data()));
+}
+
 
 /////////////////////////////////////////////////
 // str_store implementation
@@ -168,7 +173,6 @@ void test_str_store()
     assert(s1rr.has_value());
     assert(s1rr.value() == s1);
 }
-
 
 #endif
 
